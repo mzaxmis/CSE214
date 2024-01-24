@@ -1,0 +1,121 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2708
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 import java.util.Scanner;\
+\
+public class SecurityManager \{\
+\
+    private static SecurityCheck securityCheck;\
+\
+    public static void main(String[] args) \{\
+        Scanner scanner = new Scanner(System.in);\
+        System.out.println("Welcome to the Security Manager!");\
+\
+        // create a new SecurityCheck object\
+        securityCheck = new SecurityCheck();\
+\
+        // print the initial lines\
+        printAllLines();\
+\
+        // main loop\
+        while (true) \{\
+            System.out.println("Select an option:");\
+            System.out.println("(A) - Add Person");\
+            System.out.println("(N) - Next Person");\
+            System.out.println("(R) - Remove Lines");\
+            System.out.println("(L) - Add New Lines");\
+            System.out.println("(P) - Print All Lines");\
+            System.out.println("(Q) - Quit");\
+\
+            String option = scanner.nextLine();\
+\
+            switch (option.toUpperCase()) \{\
+                case "A":\
+                    addPerson(scanner);\
+                    break;\
+                case "N":\
+                    removeNextAttendee();\
+                    break;\
+                case "R":\
+                    removeLines(scanner);\
+                    break;\
+                case "L":\
+                    addNewLines(scanner);\
+                    break;\
+                case "P":\
+                    printAllLines();\
+                    break;\
+                case "Q":\
+                    System.out.println("Goodbye!");\
+                    System.exit(0);\
+                default:\
+                    System.out.println("Invalid option. Please try again.");\
+            \}\
+        \}\
+    \}\
+\
+    private static void addPerson(Scanner scanner) \{\
+        System.out.println("Enter the attendee's name:");\
+        String name = scanner.nextLine();\
+\
+        System.out.println("Enter the attendee's seat number:");\
+        int seatNumber = scanner.nextInt();\
+        scanner.nextLine(); // consume the newline character\
+\
+        try \{\
+            securityCheck.addPerson(name, seatNumber);\
+            System.out.println("Attendee added to the line.");\
+        \} catch (TakenSeatException e) \{\
+            System.out.println("Seat number already taken. Attendee not added to the line.");\
+        \}\
+    \}\
+\
+    private static void removeNextAttendee() \{\
+        try \{\
+            Person nextPerson = securityCheck.removeNextAttendee();\
+            System.out.println("Next person in line is: " + nextPerson.getName() + " (Seat #" + nextPerson.getSeatNumber() + ")");\
+        \} catch (AllLinesEmptyException e) \{\
+            System.out.println("All lines are empty.");\
+        \}\
+    \}\
+\
+    private static void removeLines(Scanner scanner) \{\
+        System.out.println("Enter the indices of the lines to remove (comma-separated):");\
+        String input = scanner.nextLine();\
+        String[] indices = input.split(",");\
+\
+        int[] removedLines = new int[indices.length];\
+        for (int i = 0; i < indices.length; i++) \{\
+            removedLines[i] = Integer.parseInt(indices[i].trim());\
+        \}\
+\
+        try \{\
+            securityCheck.removeLines(removedLines);\
+            System.out.println("Lines removed.");\
+        \} catch (LineDoesNotExistException e) \{\
+            System.out.println("One or more lines do not exist.");\
+        \} catch (SingleLineRemovalException e) \{\
+            System.out.println("Cannot remove the only line available.");\
+        \}\
+    \}\
+\
+    private static void addNewLines(Scanner scanner) \{\
+        System.out.println("Enter the number of lines to add:");\
+        int newLines = scanner.nextInt();\
+        scanner.nextLine(); // consume the newline character\
+\
+        try \{\
+            securityCheck.addNewLines(newLines);\
+            System.out.println("Lines added.");\
+        \} catch (InvalidLineCountException e) \{\
+            System.out.println("Invalid number of lines. Please enter a positive integer.");\
+        \}\
+    \}\
+\
+    private static void printAllLines() \{\
+        System.out\
+}

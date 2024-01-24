@@ -1,0 +1,110 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2708
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 import java.util.*;\
+\
+public class SecurityCheck \{\
+\
+    // Variables\
+    private Line headLine;\
+    private Line tailLine;\
+    private Line cursorLine;\
+    private int lineCount;\
+\
+    // Constructor\
+    public SecurityCheck() \{\
+        // Create one initial line\
+        Line newLine = new Line();\
+        this.headLine = newLine;\
+        this.tailLine = newLine;\
+        this.cursorLine = newLine;\
+        this.lineCount = 1;\
+    \}\
+\
+    // Adds a person to a line while maintaining condition 2.\
+    public void addPerson(String name, int seatNumber) throws TakenSeatException \{\
+        // Check if seat number is taken\
+        Person foundPerson = findPersonBySeat(seatNumber);\
+        if (foundPerson != null) \{\
+            throw new TakenSeatException("Seat number " + seatNumber + " is already taken.");\
+        \}\
+\
+        // Create new person and add to the correct line\
+        Person newPerson = new Person(name, seatNumber);\
+        Line targetLine = findLineBySeat(seatNumber);\
+        targetLine.addPerson(newPerson);\
+    \}\
+\
+    // Removes the person from the list with the lowest seat number that allows you to maintain condition 2.\
+    public Person removeNextAttendee() throws AllLinesEmptyException \{\
+        // Check if all lines are empty\
+        if (isAllLinesEmpty()) \{\
+            throw new AllLinesEmptyException("All lines are empty.");\
+        \}\
+\
+        // Find the next person to remove\
+        Person nextPersonToRemove = cursorLine.removeFrontPerson();\
+        if (cursorLine.getLength() == 0) \{\
+            removeLine(cursorLine);\
+        \}\
+\
+        // Move cursor to next line\
+        cursorLine = cursorLine.getLineLink();\
+\
+        return nextPersonToRemove;\
+    \}\
+\
+    // Adds new lines while maintaining conditions 1 and 2.\
+    public void addNewLines(int newLines) throws InvalidLineCountException \{\
+        // Check for negative input\
+        if (newLines < 0) \{\
+            throw new InvalidLineCountException("Number of new lines cannot be negative.");\
+        \}\
+\
+        // Create new lines and link them\
+        for (int i = 0; i < newLines; i++) \{\
+            Line newLine = new Line();\
+            addLine(newLine);\
+        \}\
+    \}\
+\
+    // Removes lines while maintaining conditions 1 and 2.\
+    public void removeLines(int[] removedLines) throws LineDoesNotExistException, SingleLineRemovalException \{\
+        // Check if removing all available lines\
+        if (lineCount == removedLines.length) \{\
+            throw new SingleLineRemovalException("Cannot remove the only available line.");\
+        \}\
+\
+        // Remove each line in the array\
+        for (int i = 0; i < removedLines.length; i++) \{\
+            Line targetLine = findLineByIndex(removedLines[i]);\
+            removeLine(targetLine);\
+        \}\
+    \}\
+\
+    // Helper method to find a person by seat number\
+    private Person findPersonBySeat(int seatNumber) \{\
+        Line currentLine = headLine;\
+        while (currentLine != null) \{\
+            Person foundPerson = currentLine.findPersonBySeat(seatNumber);\
+            if (foundPerson != null) \{\
+                return foundPerson;\
+            \}\
+            currentLine = currentLine.getLineLink();\
+        \}\
+        return null;\
+    \}\
+\
+    // Helper method to find a line by seat number\
+    private Line findLineBySeat(int seatNumber) \{\
+        Line currentLine = headLine;\
+        while (currentLine != null) \{\
+            if (currentLine.isSeatInLine(seatNumber)) \{\
+                return currentLine;\
+            \}\
+           \
+}
