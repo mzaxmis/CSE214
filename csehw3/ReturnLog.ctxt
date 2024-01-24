@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.target=ReturnLog
+comment0.text=\n\ Write\ a\ description\ of\ class\ ReturnLog\ here.\n\n\ @author\ (Misbah)\n\ @version\ (04/2)\n
+comment1.params=
+comment1.target=ReturnLog()
+comment2.params=returnISBN\ returnUserID\ date
+comment2.target=ReturnLog(int,\ int,\ java.util.Date)
+comment3.params=
+comment3.target=int\ getISBN()
+comment4.params=
+comment4.target=int\ getUserID()
+comment5.params=
+comment5.target=java.util.Date\ getReturnDate()
+comment6.params=log
+comment6.target=void\ setNextLog(ReturnLog)
+comment7.params=
+comment7.target=ReturnLog\ getNextLog()
+numComments=8

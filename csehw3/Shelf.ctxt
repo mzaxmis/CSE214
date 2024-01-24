@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=Shelf
+comment0.text=\n\ Write\ a\ description\ of\ class\ Shelf\ here.\n\n\ @author\ (your\ name)\n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=
+comment1.target=Shelf()
+comment2.params=addedBook
+comment2.target=void\ addBook(Book)
+comment3.params=removedISBN
+comment3.target=Book\ removeBook(int)
+comment4.params=sortCriteria
+comment4.target=void\ sort(Shelf.SortCriteria)
+numComments=5

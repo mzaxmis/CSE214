@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Date
+comment0.text=\n\ Write\ a\ description\ of\ class\ Date\ here.\n\n\ @author\ (your\ name)\n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=
+comment1.target=Date()
+comment1.text=\n\ Default\ constructor\ for\ the\ Date\ class.\ Sets\ the\ date\ to\ January\ 1,\ 1900.\n
+comment2.params=day\ month\ year
+comment2.target=Date(int,\ int,\ int)
+comment2.text=\n\ Constructor\ for\ the\ Date\ class.\ Allows\ the\ user\ to\ specify\ the\ day,\ month,\ and\ year.\n\n\ @param\ day\ \ \ The\ day\ of\ the\ month.\n\ @param\ month\ The\ month\ (1-12).\n\ @param\ year\ \ The\ year.\n
+comment3.params=d1\ d2
+comment3.target=int\ compare(Date,\ Date)
+comment3.text=\n\ Compares\ two\ Date\ objects\ to\ determine\ their\ chronological\ order.\n\n\ @param\ d1\ The\ first\ Date\ object.\n\ @param\ d2\ The\ second\ Date\ object.\n\ @return\ 0\ if\ d1\ is\ equal\ to\ d2,\ -1\ if\ d1\ is\ before\ d2,\ and\ 1\ if\ d1\ is\ after\ d2.\n
+numComments=4
